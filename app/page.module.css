@@ -73,3 +73,25 @@
   margin: 2rem auto;
   text-align: center;
 }
+
+.container {
+  display: flex;
+}
+
+.left-side {
+  flex: 60%;
+  padding-left: 5rem;
+  padding-right: 3rem;
+  margin-top: 3rem;
+}
+
+.right-side {
+  flex: 40%; 
+}
+
+.right-side img {
+    width: 90%;
+    height: 90%;
+    object-fit: contain;
+    filter: drop-shadow(0 0 0.75rem rgba(0, 0, 0, 0.5));
+}

@@ -1,25 +1,20 @@
-import classes from "./header-background.module.css";
+import classes from "@/components/header/header-background.module.css";
 
 export default function MainHeaderBackground() {
     return (
         <div className={classes["header-background"]}>
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
-              <defs>
-                <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                  <stop
-                    offset="0%"
-                    style={{ stopColor: '#2ecc71', stopOpacity: '0.6' }}
-                  />
-                  <stop
-                    offset="100%"
-                    style={{ stopColor: '#17be5d', stopOpacity: '0.7' }}
-                  />
-                </linearGradient>
-              </defs>
-              <path
-                fill="url(#gradient)"
-                d="M0,256L48,240C96,224,192,192,288,181.3C384,171,480,181,576,186.7C672,192,768,192,864,181.3C960,171,1056,149,1152,133.3C1248,117,1344,107,1392,101.3L1440,96L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z"
-              ></path>
+          <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 65 75">
+            <defs>
+              <linearGradient gradientTransform="rotate(90)" id="pillGradient">
+                <stop stop-color="#5ebd38" offset="0%"/>
+                <stop stop-color="#8fe76b" offset="100%"/>
+              </linearGradient>
+            </defs>
+            <g>
+              <g id="svg_2">
+                <path id="svg_1" d="m73.06197,-76.13025c3.79648,-6.81659 12.37429,-9.15273 18.78541,-5.11614l12.35259,7.77749c6.41111,4.03659 8.60829,13.15692 4.81181,19.97351l-52.87981,93.68972c-7.30068,11.19039 -22.58207,10.93463 -28.99319,6.89804l-1.38308,-0.97379c-7.93466,-7.27641 -8.76061,-21.58051 -4.96412,-28.39711l52.27039,-93.85171z" opacity="undefined" fill="url(#pillGradient)"/>
+              </g>
+            </g>
             </svg>
         </div>
     )
