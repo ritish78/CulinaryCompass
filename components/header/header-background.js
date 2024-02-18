@@ -6,8 +6,8 @@ export default function MainHeaderBackground() {
           <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 65 75">
             <defs>
               <linearGradient gradientTransform="rotate(90)" id="pillGradient">
-                <stop stop-color="#5ebd38" offset="0%"/>
-                <stop stop-color="#8fe76b" offset="100%"/>
+                <stop stopColor="#5ebd38" offset="0%"/>
+                <stop stopColor="#8fe76b" offset="100%"/>
               </linearGradient>
             </defs>
             <g>

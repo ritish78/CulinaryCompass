@@ -23,7 +23,7 @@
 
 .nav a {
     text-decoration: none;
-    color: #ddd6cb;
+    color: #f3ece0;
     font-weight: bold;
     padding: 0.5rem 1rem;
     border-radius: 0.5rem;
@@ -31,15 +31,12 @@
 
 .nav a:hover,
 .nav a:active {
-    background: linear-gradient(90deg, #05ff12, #a3f65f);
     background-clip: text;
     -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    text-shadow: 0 0 18px rgba(73, 248, 42, 0.8);
+    color: #a3f65f;
 }
 
 .active {
-    background: linear-gradient(90deg, #05ff12, #a3f65f);
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -51,7 +48,7 @@
     justify-content: center;
     gap: 2rem;
     text-decoration: none;
-    color: #ddd6cb;
+    color: #f3ece0;
     font-weight: bold;
     font-family: "Poppins", sans-serif;
     letter-spacing: 0.15rem;

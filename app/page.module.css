@@ -12,7 +12,7 @@
 }
 
 .hero {
-  color: #ddd6cb;
+  color: #f3ece0;
   font-size: 1.5rem;
 }
 
@@ -40,7 +40,7 @@
   padding: 0.5rem 1rem;
   border-radius: 0.5rem;
   background: linear-gradient(90deg, #05ff93, #aaf46d);
-  color: #ffffff;
+  color: #f3ece0;
   font-weight: bold;
   text-decoration: none;
 }
@@ -94,4 +94,20 @@
     height: 90%;
     object-fit: contain;
     filter: drop-shadow(0 0 0.75rem rgba(0, 0, 0, 0.5));
+}
+
+.left-side-slideshow {
+    flex: 40%;
+    margin-top: 30rem;
+    padding-left: 3rem;
+    position: sticky;
+    top: 50%;
+    transform: translateY(-50%);
+    max-height: 600px;
+}
+  
+.right-side-text {
+    flex: 60%;  
+    margin-top: 10rem;
+    overflow: auto;
 }
