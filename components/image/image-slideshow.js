@@ -1,15 +1,6 @@
-// import { useEffect, useState } from 'react';
 'use client';
 
-import { Card, CardContent } from "@/components/ui/card";
-
-import {
-    Carousel,
-    CarouselContent,
-    CarouselItem,
-    CarouselNext,
-    CarouselPrevious,
-} from "@/components/ui/carousel";
+import { useEffect, useState } from 'react';
 
 import classes from "./image-slideshow.module.css";
   
@@ -36,28 +27,30 @@ const images = [
 ]
 
 export default function ImageSlideShow() {
+     const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setCurrentImageIndex((previousIndex) => 
+                previousIndex < (images.length - 1) ? (previousIndex + 1) : 0
+            )
+        }, 5000);
+
+        return () => clearInterval(interval);
+    }, []);
+    
     return (
-        <div>
-            <Carousel>
-                <CarouselContent>
-                    {
-                        images.map((image, index) => (
-                            <CarouselItem key={index}>
-                                <Card>
-                                    <CardContent>
-                                        <Image 
-                                            src={image.images[0]} 
-                                            alt={image.alt}
-                                        />
-                                    </CardContent>
-                                </Card>
-                            </CarouselItem>
-                        ))
-                    }
-                </CarouselContent>
-                <CarouselPrevious />
-                <CarouselNext />
-            </Carousel>
+        <div className={classes.slideshow}>
+            {
+                images.map((image, index) => (
+                    <Image
+                        key={index}
+                        src={image.images[0]}
+                        alt={image.alt}
+                        className={index === currentImageIndex ? classes.active : ''}
+                    />
+                ))
+            }
         </div>
     )
 }
