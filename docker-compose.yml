@@ -1,0 +1,21 @@
+version: "3.8"
+
+services:
+  frontend:
+    container_name: frontend-culinarycompass
+    build: ./client
+    stdin_open: true
+    command: npm run start-watch
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+    volumes:
+      - ./client:/usr/src/app
+      - /usr/src/app/node_modules
+      - /usr/src/app/.next
+    ports:
+      - 3000:3000
+    networks:
+      - culinarycompass-network
+
+networks:
+  culinarycompass-network:
