@@ -1,0 +1,42 @@
+.hero {
+  color: #f3ece0;
+  font-size: 1.5rem;
+}
+
+.hero h1 {
+  font-size: 2rem;
+  font-weight: bold;
+  font-family: "Poppins", sans-serif;
+  letter-spacing: 0.15rem;
+  text-transform: uppercase;
+  background: linear-gradient(90deg, #05ff12, #a3f65f);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.container {
+  display: flex;
+}
+
+.left-side {
+  flex: 60%;
+  padding-left: 5rem;
+  padding-right: 3rem;
+  margin-top: 3rem;
+}
+
+.right-side {
+  flex: 40%;
+}
+
+.right-side img {
+  width: 90%;
+  height: 90%;
+  object-fit: contain;
+  filter: drop-shadow(0 0 0.75rem rgba(0, 0, 0, 0.5));
+}
+
+.join-now {
+    padding-left: 5rem;
+}

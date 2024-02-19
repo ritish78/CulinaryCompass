@@ -4,10 +4,12 @@ import Link from "next/link";
 
 import cookingSvgLink from "@/public/homePage.svg";
 import Image from "next/image";
+import MainHeaderBackground from "@/components/header/header-background";
 
 export default function Home() {
   return (
     <>
+      <MainHeaderBackground />
       <main className={classes["container"]}>
         <section className={classes["left-side"]}>
           <div className={classes.hero}>

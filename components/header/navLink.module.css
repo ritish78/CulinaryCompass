@@ -1,0 +1,19 @@
+.link {
+    text-decoration: none;
+    color: #f3ece0;
+    font-weight: bold;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+}
+
+.link:hover,
+.link:active {
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: #a3f65f;
+}
+
+.active {
+    background-clip: text;
+    color: #a3f65f;
+}
