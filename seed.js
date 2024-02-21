@@ -1,11 +1,13 @@
-const sql = require('better-sqlite3');
-const db = sql('meals.db');
+require('dotenv').config();
+
+const { db } = require("@vercel/postgres");
+//Documentation: https://github.com/vercel/storage/tree/main/packages/postgres#readme
 
 const dummyMeals = [
     {
         title: 'Creamy Carbonara',
         slug: 'creamy-carbonara',
-        images: './public/foodImages/Carbonara.jpg',
+        images: ['./public/foodImages/Carbonara.jpg'],
         summary:
           'Indulge in a bowl of rich and creamy carbonara pasta, made with eggs, cheese, pancetta, and black pepper.',
         instructions: `
@@ -27,7 +29,7 @@ const dummyMeals = [
     {
         title: 'Chocolate Chip Cookie',
         slug: 'chocolate-chip-cookie',
-        images: './public/foodImages/ChocolateChipCookie.jpg',
+        images: ['./public/foodImages/ChocolateChipCookie.jpg'],
         summary:
           'Indulge in the classic goodness of a chocolate chip cookie, with a perfect balance of sweetness and gooey chocolate chips.',
         instructions: `
@@ -49,7 +51,7 @@ const dummyMeals = [
     {
       title: 'Classic Cheese Burger',
       slug: 'classic-cheese-burger',
-      images: './public/foodImages/ClassicCheeseBurger.jpg',
+      images: ['./public/foodImages/ClassicCheeseBurger.jpg'],
       summary:
         'A mouth-watering burger with a juicy meat patty and melted cheese, served in a soft bun.',
       instructions: `
@@ -71,7 +73,7 @@ const dummyMeals = [
     {
         title: 'Grilled Chicken Caesar Salad',
         slug: 'grilled-chicken-caesar-salad',
-        images: './public/foodImages/GrilledChickenCeaserSalad.jpg',
+        images: ['./public/foodImages/GrilledChickenCeaserSalad.jpg'],
         summary:
           'Savor the freshness of crisp romaine lettuce, grilled chicken, croutons, and parmesan cheese tossed in a creamy Caesar dressing.',
         instructions: `
@@ -96,7 +98,7 @@ const dummyMeals = [
     {
         title: 'Mango Smoothie',
         slug: 'mango-smoothie',
-        images: './public/foodImages/MangoSmoothie.jpg',
+        images: ['./public/foodImages/MangoSmoothie.jpg'],
         summary:
           'Experience the tropical delight with this refreshing mango smoothie, blending sweet ripe mangoes with yogurt and a hint of honey.',
         instructions: `
@@ -123,7 +125,7 @@ const dummyMeals = [
     {
         title: 'Classic Margherita Pizza',
         slug: 'margherita-pizza',
-        images: './public/foodImages/MargheritaPizza.jpg',
+        images: ['./public/foodImages/MargheritaPizza.jpg'],
         summary:
           'Indulge in the simplicity of a classic Margherita pizza, featuring a thin crust topped with fresh tomatoes, mozzarella cheese, and basil leaves.',
         instructions: `
@@ -151,7 +153,7 @@ const dummyMeals = [
     {
         title: 'Salami Pizza',
         slug: 'salami-pizza',
-        images: './public/foodImages/SalamiPizza.jpg',
+        images: ['./public/foodImages/SalamiPizza.jpg'],
         summary:
           'Enjoy the bold and savory flavors of this salami pizza, topped with zesty tomato sauce, mozzarella cheese, and slices of delicious cured salami.',
         instructions: `
@@ -179,7 +181,7 @@ const dummyMeals = [
     {
         title: 'Sushi Roll',
         slug: 'sushi-roll',
-        images: './public/foodImages/SushiRoll.jpg',
+        images: ['./public/foodImages/SushiRoll.jpg'],
         summary:
           'Experience the artistry of Japanese cuisine with this deluxe sushi roll, featuring fresh sushi rice, a variety of colorful vegetables, and succulent slices of sashimi-grade fish.',
         instructions: `
@@ -209,37 +211,52 @@ const dummyMeals = [
       }      
 ]
 
-db.prepare(`
-    CREATE TABLE IF NOT EXISTS meals (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        slug TEXT NOT NULL UNIQUE,
-        title TEXT NOT NULL,
-        images TEXT NOT NULL,
-        summary TEXT NOT NULL,
-        instructions TEXT NOT NULL,
-        creator TEXT NOT NULL,
-        creator_email TEXT NOT NULL
-    )
-`).run();
+async function seedMealsData(databaseClient) {
+   try{
+      //Create table only if the table does not exist
+      const table = await databaseClient.sql`
+      CREATE TABLE IF NOT EXISTS meals (
+         id UUID PRIMARY KEY,
+         slug TEXT NOT NULL UNIQUE,
+         title TEXT NOT NULL,
+         images TEXT[] NOT NULL,
+         summary TEXT NOT NULL,
+         instructions TEXT NOT NULL,
+         creator TEXT NOT NULL,
+         creator_email TEXT NOT NULL
+      );`
 
+      //Once the table is created, insert the dummy meals
+      const meals = await Promise.all(
+         dummyMeals.map(
+            meal => databaseClient.sql`
+               INSERT INTO meals (id, title, slug, images, summary, instructions, creator, creator_email)
+               VALUES (${meal.id}, ${meal.title}, ${meal.slug}, ${meal.images}, ${meal.summary}, ${meal.instructions}, ${meal.creator}, ${meal.creator_email})
+               ON CONFLICT (id) DO NOTHING;
+            `
+         )
+      )
 
-async function initData() {
-    const statement = db.prepare(`
-        INSERT INTO meals VALUES (
-            null,
-            @slug,
-            @title,
-            @images,
-            @summary,
-            @instructions,
-            @creator,
-            @creator_email
-        )
-    `);
-
-    for (const meal of dummyMeals) {
-        statement.run(meal);
-    }
+      return {
+         table,
+         meals
+      }
+   } catch (error) {
+      console.log('Error occurred while creating table and seeding dummy meal!');
+      throw error;
+   }
 }
 
-initData();
+const pool = db.createPool({
+   connectionString: process.env.POSTGRES_URL
+})
+
+async function main() {
+   const client = await db.connect();
+
+   await seedMealsData(client);
+}
+
+main().catch(error => {
+   console.error("Error occurred while connecting to Postgres.", error)
+})
