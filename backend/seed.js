@@ -8,7 +8,7 @@ const dummyMeals = [
     id: "ea82baf0-8b6a-4d6c-89e9-43c4d1f61d7a",
     title: "Creamy Carbonara",
     slug: "creamy-carbonara",
-    images: ["./public/foodImages/Carbonara.jpg"],
+    images: ["https://res.cloudinary.com/dljohw82z/image/upload/v1708498502/ByteBuy/image_1708498502126.webp"],
     summary:
       "Indulge in a bowl of rich and creamy carbonara pasta, made with eggs, cheese, pancetta, and black pepper.",
     instructions: `
@@ -31,7 +31,7 @@ const dummyMeals = [
     id: "3fe0cb67-9bd1-45a5-8b4f-2b0a7e5d9e1c",
     title: "Chocolate Chip Cookie",
     slug: "chocolate-chip-cookie",
-    images: ["./public/foodImages/ChocolateChipCookie.jpg"],
+    images: ["https://res.cloudinary.com/dljohw82z/image/upload/v1708498583/CulinaryCompass/Chocolate_Chip_Cookie_x5iywk.jpg"],
     summary:
       "Indulge in the classic goodness of a chocolate chip cookie, with a perfect balance of sweetness and gooey chocolate chips.",
     instructions: `
@@ -54,7 +54,7 @@ const dummyMeals = [
     id: "b8f01a7e-6f33-4d9b-98e0-7f5700c64b42",
     title: "Classic Cheese Burger",
     slug: "classic-cheese-burger",
-    images: ["./public/foodImages/ClassicCheeseBurger.jpg"],
+    images: ["https://res.cloudinary.com/dljohw82z/image/upload/v1708498583/CulinaryCompass/Classic_Cheese_Burger_fsqv8u.jpg"],
     summary:
       "A mouth-watering burger with a juicy meat patty and melted cheese, served in a soft bun.",
     instructions: `
@@ -77,7 +77,7 @@ const dummyMeals = [
     id: "524f9781-39e9-45d6-94c7-12a4954f63a6",
     title: "Grilled Chicken Caesar Salad",
     slug: "grilled-chicken-caesar-salad",
-    images: ["./public/foodImages/GrilledChickenCeaserSalad.jpg"],
+    images: ["https://res.cloudinary.com/dljohw82z/image/upload/v1708498584/CulinaryCompass/Grilled_Chicken_Ceaser_Salad_emv1bj.jpg"],
     summary:
       "Savor the freshness of crisp romaine lettuce, grilled chicken, croutons, and parmesan cheese tossed in a creamy Caesar dressing.",
     instructions: `
@@ -103,7 +103,7 @@ const dummyMeals = [
     id: "9c23b302-d2d8-4a48-bb97-833c4c9aeb45",
     title: "Mango Smoothie",
     slug: "mango-smoothie",
-    images: ["./public/foodImages/MangoSmoothie.jpg"],
+    images: ["https://res.cloudinary.com/dljohw82z/image/upload/v1708498815/CulinaryCompass/Mango_Smoothie_dcnbv6.jpg"],
     summary:
       "Experience the tropical delight with this refreshing mango smoothie, blending sweet ripe mangoes with yogurt and a hint of honey.",
     instructions: `
@@ -131,7 +131,7 @@ const dummyMeals = [
     id: "b0e430a3-4f68-4c74-80a8-201a88b0f0cd",
     title: "Classic Margherita Pizza",
     slug: "margherita-pizza",
-    images: ["./public/foodImages/MargheritaPizza.jpg"],
+    images: ["https://res.cloudinary.com/dljohw82z/image/upload/v1708498583/CulinaryCompass/Margherita_Pizza_he0tzc.jpg"],
     summary:
       "Indulge in the simplicity of a classic Margherita pizza, featuring a thin crust topped with fresh tomatoes, mozzarella cheese, and basil leaves.",
     instructions: `
@@ -160,7 +160,7 @@ const dummyMeals = [
     id: "7aeb44f7-1a24-4f8d-ba09-3f37318db95a",
     title: "Salami Pizza",
     slug: "salami-pizza",
-    images: ["./public/foodImages/SalamiPizza.jpg"],
+    images: ["https://res.cloudinary.com/dljohw82z/image/upload/v1708498584/CulinaryCompass/Salami_Pizza_lcumww.jpg"],
     summary:
       "Enjoy the bold and savory flavors of this salami pizza, topped with zesty tomato sauce, mozzarella cheese, and slices of delicious cured salami.",
     instructions: `
@@ -189,7 +189,7 @@ const dummyMeals = [
     id: "e28d2e0a-bc2e-40c3-987a-6d6ecbbd0e3d",
     title: "Sushi Roll",
     slug: "sushi-roll",
-    images: ["./public/foodImages/SushiRoll.jpg"],
+    images: ["https://res.cloudinary.com/dljohw82z/image/upload/v1708498583/CulinaryCompass/Sushi_roll_cyxfxe.jpg"],
     summary:
       "Experience the artistry of Japanese cuisine with this deluxe sushi roll, featuring fresh sushi rice, a variety of colorful vegetables, and succulent slices of sashimi-grade fish.",
     instructions: `
@@ -242,6 +242,7 @@ async function seedMealsData(databaseClient) {
         (meal) => databaseClient.sql`
                INSERT INTO meals (id, title, slug, images, summary, instructions, creator, creator_email)
                VALUES (${meal.id}, ${meal.title}, ${meal.slug}, ${meal.images}, ${meal.summary}, ${meal.instructions}, ${meal.creator}, ${meal.creator_email})
+               ON CONFLICT (id) DO NOTHING;
             `
       )
     );
@@ -265,6 +266,8 @@ async function main() {
 
   await seedMealsData(client);
   console.log("Added dummy meals to db.");
+
+  await db.end();
 }
 
 main().catch((error) => {
