@@ -8,10 +8,16 @@ export default function MealItem({ title, slug, images, summary, creator }) {
     <article className={classes.meal}>
       <header>
         <div className={classes.image}>
-          <Image src={images[0]} alt={title} fill />
+          <Link href={`/meals/${slug}`}>
+            <Image src={images[0]} alt={title} fill />
+          </Link>
         </div>
         <div className={classes.headerText}>
-          <h2>{title}</h2>
+          <h2>
+            <Link href={`/meals/${slug}`}>
+              {title}
+            </Link>
+          </h2>
           <p>by {creator}</p>
         </div>
       </header>

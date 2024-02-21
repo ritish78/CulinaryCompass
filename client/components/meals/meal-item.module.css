@@ -21,6 +21,15 @@
   font-family: "Poppins", sans-serif;
 }
 
+.headerText a {
+  text-decoration: none;
+  color: #05ff93;
+}
+
+.headerText a:hover {
+  color: #05ff12;
+}
+
 .headerText p {
   font-size: 0.75rem;
   color: #f3ece0;
@@ -34,7 +43,7 @@
 
 .image {
   position: relative;
-  height: 15rem;
+  height: 20rem;
 }
 
 .meal img {
@@ -62,7 +71,7 @@
   margin-top: 1rem;
   padding: 0.5rem 1rem;
   border-radius: 0.5rem;
-  background: linear-gradient(90deg, #05ff12, #a3f65f);
+  background: linear-gradient(90deg, #05ff93, #aaf46d);
   color: #ffffff;
   font-weight: bold;
   text-decoration: none;

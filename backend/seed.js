@@ -8,7 +8,7 @@ const dummyMeals = [
     id: "ea82baf0-8b6a-4d6c-89e9-43c4d1f61d7a",
     title: "Creamy Carbonara",
     slug: "creamy-carbonara",
-    images: ["https://res.cloudinary.com/dljohw82z/image/upload/v1708498502/ByteBuy/image_1708498502126.webp"],
+    images: ["https://res.cloudinary.com/dljohw82z/image/upload/v1708498582/CulinaryCompass/Carbonara_bgqhos.jpg"],
     summary:
       "Indulge in a bowl of rich and creamy carbonara pasta, made with eggs, cheese, pancetta, and black pepper.",
     instructions: `

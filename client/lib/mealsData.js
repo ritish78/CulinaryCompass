@@ -8,6 +8,7 @@ export async function getMeals() {
     noStore();
 
     try {
+        // throw new Error('Testing error screen!');
         const data = await sql`SELECT * FROM meals ORDER BY title ASC`;
 
         return data.rows;
