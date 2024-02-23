@@ -21,7 +21,7 @@ export default function Home() {
             </div>
             <div className={classes.cta}>
               <Link href="/community">Join our community</Link>
-              <Link href="/meals">Meals Page</Link>
+              <Link href="/meals">View Meals</Link>
             </div>
         </section>
         <section className={classes["right-side"]}>

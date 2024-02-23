@@ -2,7 +2,7 @@
 
 import classes from "./error.module.css";
 
-export default function MealsError({ error }) {
+export default function MealsError() {
     return (
         <div className={classes["error-container"]}>
             <main className="error">

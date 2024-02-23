@@ -20,20 +20,18 @@ body {
 }
 
 .not-found h1 {
-  font-size: 5rem;
+  font-size: 2.5rem;
   margin: 0px;
   font-weight: 900;
-  color: #f3ece0;
   text-transform: uppercase;
-  background: linear-gradient(90deg, #05ff12, #a3f65f);
-  -webkit-text-fill-color: transparent;
-  background-size: cover;
-  background-position: center;
-  font-family: "Protest Revolution", "sans-serif";
+  font-family: "Poppins", "sans-serif";
+  color: #05ff93;
+  margin-bottom: 10px;
 }
 
 .not-found p {
   font-size: 1.5rem;
-  font-weight: 500;
-  color: #f3ece0;
+  margin-top: 10px;
+  font-style: italic;
+  color: #fae756;
 }
