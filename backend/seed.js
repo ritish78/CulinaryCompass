@@ -8,7 +8,17 @@ const dummyMeals = [
     id: "ea82baf0-8b6a-4d6c-89e9-43c4d1f61d7a",
     title: "Creamy Carbonara",
     slug: "creamy-carbonara",
-    images: ["https://res.cloudinary.com/dljohw82z/image/upload/v1708498582/CulinaryCompass/Carbonara_bgqhos.jpg"],
+    images: [
+      "https://res.cloudinary.com/dljohw82z/image/upload/v1708498582/CulinaryCompass/Carbonara_bgqhos.jpg",
+    ],
+    ingredients: `
+      - 200g spaghetti
+      - 3 egg yolks
+      - 1 cup grated Parmesan cheese
+      - Black pepper (to taste)
+      - 100g diced pancetta
+      - Extra Parmesan for serving
+      `,
     summary:
       "Indulge in a bowl of rich and creamy carbonara pasta, made with eggs, cheese, pancetta, and black pepper.",
     instructions: `
@@ -31,9 +41,22 @@ const dummyMeals = [
     id: "3fe0cb67-9bd1-45a5-8b4f-2b0a7e5d9e1c",
     title: "Chocolate Chip Cookie",
     slug: "chocolate-chip-cookie",
-    images: ["https://res.cloudinary.com/dljohw82z/image/upload/v1708498583/CulinaryCompass/Chocolate_Chip_Cookie_x5iywk.jpg"],
+    images: [
+      "https://res.cloudinary.com/dljohw82z/image/upload/v1708498583/CulinaryCompass/Chocolate_Chip_Cookie_x5iywk.jpg",
+    ],
     summary:
       "Indulge in the classic goodness of a chocolate chip cookie, with a perfect balance of sweetness and gooey chocolate chips.",
+    ingredients: `
+      - 1 cup softened butter
+      - 1 cup brown sugar
+      - 1/2 cup granulated sugar
+      - 2 eggs
+      - 1 teaspoon vanilla extract
+      - 2 1/4 cups all-purpose flour
+      - 1/2 teaspoon baking soda
+      - Pinch of salt
+      - 2 cups chocolate chips
+      `,
     instructions: `
           1. Preheat the oven:
              Set the oven to 350°F (180°C) and line a baking sheet with parchment paper.
@@ -52,11 +75,24 @@ const dummyMeals = [
   },
   {
     id: "b8f01a7e-6f33-4d9b-98e0-7f5700c64b42",
-    title: "Classic Cheese Burger",
-    slug: "classic-cheese-burger",
-    images: ["https://res.cloudinary.com/dljohw82z/image/upload/v1708498583/CulinaryCompass/Classic_Cheese_Burger_fsqv8u.jpg"],
+    title: "Cheese Burger",
+    slug: "cheese-burger",
+    images: [
+      "https://res.cloudinary.com/dljohw82z/image/upload/v1708498583/CulinaryCompass/Classic_Cheese_Burger_fsqv8u.jpg",
+    ],
     summary:
       "A mouth-watering burger with a juicy meat patty and melted cheese, served in a soft bun.",
+    ingredients: `
+      - 200g ground meat (of your choice)
+      - Salt (to taste)
+      - Pepper (to taste)
+      - Oil (for cooking)
+      - Burger buns
+      - Lettuce
+      - Tomato
+      - Cheese slices
+    `,
+
     instructions: `
         1. Prepare the patty:
            Mix 200g of ground meat of your choice with salt and pepper. Form into a patty.
@@ -77,9 +113,23 @@ const dummyMeals = [
     id: "524f9781-39e9-45d6-94c7-12a4954f63a6",
     title: "Grilled Chicken Caesar Salad",
     slug: "grilled-chicken-caesar-salad",
-    images: ["https://res.cloudinary.com/dljohw82z/image/upload/v1708498584/CulinaryCompass/Grilled_Chicken_Ceaser_Salad_emv1bj.jpg"],
+    images: [
+      "https://res.cloudinary.com/dljohw82z/image/upload/v1708498584/CulinaryCompass/Grilled_Chicken_Ceaser_Salad_emv1bj.jpg",
+    ],
     summary:
       "Savor the freshness of crisp romaine lettuce, grilled chicken, croutons, and parmesan cheese tossed in a creamy Caesar dressing.",
+    ingredients: `
+      - Chicken breasts
+      - Salt (to taste)
+      - Pepper (to taste)
+      - Favorite herbs (for seasoning)
+      - Day-old bread (for croutons)
+      - Olive oil
+      - Garlic powder
+      - Romaine lettuce
+      - Parmesan cheese (grated)
+      - Classic Caesar dressing
+    `,
     instructions: `
           1. Grill the chicken:
              Season chicken breasts with salt, pepper, and your favorite herbs. Grill until fully cooked, about 6-8 minutes per side. Slice into thin strips.
@@ -103,9 +153,19 @@ const dummyMeals = [
     id: "9c23b302-d2d8-4a48-bb97-833c4c9aeb45",
     title: "Mango Smoothie",
     slug: "mango-smoothie",
-    images: ["https://res.cloudinary.com/dljohw82z/image/upload/v1708498815/CulinaryCompass/Mango_Smoothie_dcnbv6.jpg"],
+    images: [
+      "https://res.cloudinary.com/dljohw82z/image/upload/v1708498815/CulinaryCompass/Mango_Smoothie_dcnbv6.jpg",
+    ],
     summary:
       "Experience the tropical delight with this refreshing mango smoothie, blending sweet ripe mangoes with yogurt and a hint of honey.",
+    ingredients: `
+      - 2 ripe mangoes (peeled and diced)
+      - 1 cup plain yogurt
+      - 1 tablespoon honey
+      - Ice cubes
+      - Mango slices (for garnish, optional)
+      - Coconut milk (optional, for an extra tropical twist)
+    `,
     instructions: `
           1. Gather the ingredients:
              Peel and dice 2 ripe mangoes. You'll also need 1 cup of plain yogurt, a tablespoon of honey, and ice cubes.
@@ -131,9 +191,22 @@ const dummyMeals = [
     id: "b0e430a3-4f68-4c74-80a8-201a88b0f0cd",
     title: "Classic Margherita Pizza",
     slug: "margherita-pizza",
-    images: ["https://res.cloudinary.com/dljohw82z/image/upload/v1708498583/CulinaryCompass/Margherita_Pizza_he0tzc.jpg"],
+    images: [
+      "https://res.cloudinary.com/dljohw82z/image/upload/v1708498583/CulinaryCompass/Margherita_Pizza_he0tzc.jpg",
+    ],
     summary:
       "Indulge in the simplicity of a classic Margherita pizza, featuring a thin crust topped with fresh tomatoes, mozzarella cheese, and basil leaves.",
+    ingredients: `
+  - Pizza dough
+  - Tomato sauce
+  - Fresh tomatoes (sliced)
+  - Fresh mozzarella cheese (sliced)
+  - Olive oil
+  - Salt (to taste)
+  - Pepper (to taste)
+  - Fresh basil leaves
+`,
+
     instructions: `
           1. Preheat the oven:
              Set your oven to the highest temperature (usually around 475°F or 245°C) and place a pizza stone or baking sheet inside.
@@ -160,9 +233,22 @@ const dummyMeals = [
     id: "7aeb44f7-1a24-4f8d-ba09-3f37318db95a",
     title: "Salami Pizza",
     slug: "salami-pizza",
-    images: ["https://res.cloudinary.com/dljohw82z/image/upload/v1708498584/CulinaryCompass/Salami_Pizza_lcumww.jpg"],
+    images: [
+      "https://res.cloudinary.com/dljohw82z/image/upload/v1708498584/CulinaryCompass/Salami_Pizza_lcumww.jpg",
+    ],
     summary:
       "Enjoy the bold and savory flavors of this salami pizza, topped with zesty tomato sauce, mozzarella cheese, and slices of delicious cured salami.",
+    ingredients: `
+      - Pizza dough
+      - Tomato sauce
+      - Shredded mozzarella cheese
+      - Slices of cured salami
+      - Optional extras:
+        - Sliced olives
+        - Red pepper flakes
+        - Fresh herbs
+    `,
+
     instructions: `
           1. Preheat the oven:
              Preheat your oven to 475°F (245°C) and place a pizza stone or baking sheet inside.
@@ -189,9 +275,28 @@ const dummyMeals = [
     id: "e28d2e0a-bc2e-40c3-987a-6d6ecbbd0e3d",
     title: "Sushi Roll",
     slug: "sushi-roll",
-    images: ["https://res.cloudinary.com/dljohw82z/image/upload/v1708498583/CulinaryCompass/Sushi_roll_cyxfxe.jpg"],
+    images: [
+      "https://res.cloudinary.com/dljohw82z/image/upload/v1708498583/CulinaryCompass/Sushi_roll_cyxfxe.jpg",
+    ],
     summary:
       "Experience the artistry of Japanese cuisine with this deluxe sushi roll, featuring fresh sushi rice, a variety of colorful vegetables, and succulent slices of sashimi-grade fish.",
+    ingredients: `
+      - Sushi rice
+      - Nori (seaweed) sheets
+      - Sashimi-grade fish (e.g., tuna or salmon)
+      - Cucumber
+      - Avocado
+      - Sesame seeds
+      - For seasoning rice:
+        - Rice vinegar
+        - Sugar
+        - Salt
+      - Optional accompaniments:
+        - Soy sauce
+        - Pickled ginger
+        - Wasabi
+    `,
+
     instructions: `
           1. Gather the ingredients:
              Prepare sushi rice, nori (seaweed) sheets, sashimi-grade fish (such as tuna or salmon), cucumber, avocado, and sesame seeds.
@@ -229,19 +334,20 @@ async function seedMealsData(databaseClient) {
          title TEXT NOT NULL,
          images TEXT[] NOT NULL,
          summary TEXT NOT NULL,
+         ingredients TEXT NOT NULL,
          instructions TEXT NOT NULL,
          creator TEXT NOT NULL,
          creator_email TEXT NOT NULL
       );`;
 
-   console.log("Table created!");
+    console.log("Table created!");
 
     //Once the table is created, insert the dummy meals
     const meals = await Promise.all(
       dummyMeals.map(
         (meal) => databaseClient.sql`
-               INSERT INTO meals (id, title, slug, images, summary, instructions, creator, creator_email)
-               VALUES (${meal.id}, ${meal.title}, ${meal.slug}, ${meal.images}, ${meal.summary}, ${meal.instructions}, ${meal.creator}, ${meal.creator_email})
+               INSERT INTO meals (id, title, slug, images, summary, ingredients, instructions, creator, creator_email)
+               VALUES (${meal.id}, ${meal.title}, ${meal.slug}, ${meal.images}, ${meal.summary}, ${meal.ingredients}, ${meal.instructions}, ${meal.creator}, ${meal.creator_email})
                ON CONFLICT (id) DO NOTHING;
             `
       )
