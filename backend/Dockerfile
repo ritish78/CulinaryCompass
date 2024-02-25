@@ -2,7 +2,7 @@
 FROM node:18-alpine
 
 # Selecting Workdir
-WORKDIR /usr/src/app/client
+WORKDIR /usr/src/app/backend
 
 # Copying package.json and package-lock.json file
 COPY package*.json .

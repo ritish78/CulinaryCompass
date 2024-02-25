@@ -7,13 +7,27 @@ services:
     stdin_open: true
     command: npm run start-watch
     volumes:
-      - ./client:/usr/src/app
-      - /usr/src/app/node_modules
-      - /usr/src/app/.next
-    ports:
-      - 3000:3000
+      - ./client:/usr/src/app/client
+      - /usr/src/app/client/node_modules
+      - /usr/src/app/client/.next
     networks:
       - culinarycompass-network
+    ports:
+      - 3000:3000
+    depends_on:
+      - backend
+
+  backend:
+    container_name: backend-culinarycompass
+    build: ./backend
+    command: npm start
+    volumes:
+      - ./backend:/usr/src/app/backend
+      - /usr/src/app/backend/node_modules
+    networks:
+      - culinarycompass-network
+    ports:
+      - 5000:5000
 
 networks:
   culinarycompass-network:

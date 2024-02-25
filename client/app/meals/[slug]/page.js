@@ -2,10 +2,19 @@ import { getMealsBySlug } from "@/lib/mealsData";
 import Image from "next/image";
 
 import classes from "./page.module.css";
+import NotFoundPage from "@/app/not-found";
 
 export default async function MealsInfoPage({ params }) {
     const meal = await getMealsBySlug(params.slug);
-    meal.instructions = meal.instructions.replace(/\n/g, '<br/>')
+
+    //If user inputs incorrect params of meals
+    if (!meal) {
+        return NotFoundPage();
+    }
+
+    //Replacing the empty whitespace saved as lines to a line break in html
+    meal.instructions = meal.instructions.replace(/\n/g, '<br/>');
+    meal.ingredients = meal.ingredients.replace(/\n/g, '<br/>');
 
     return (
         <>
@@ -21,6 +30,15 @@ export default async function MealsInfoPage({ params }) {
                     <p className={classes.summary}>
                         {meal.summary}
                     </p>
+                    <div className={classes.instructions}>
+                        <h4>Ingredients: </h4>
+                        <p 
+                            dangerouslySetInnerHTML={{
+                                __html: meal.ingredients
+                            }}
+                        >
+                        </p>
+                    </div>
                 </div>
             </header>
             <main className={classes.instructions}>
@@ -28,7 +46,7 @@ export default async function MealsInfoPage({ params }) {
                     When we use dangerouslySetInnerHTML, necessary measures to prevent XSS should be taken into place.
                     https://blog.logrocket.com/using-dangerouslysetinnerhtml-react-application/ 
                 */}
-
+                <h3>Instructions: </h3>
                <p
                     dangerouslySetInnerHTML={{
                         __html: meal.instructions
