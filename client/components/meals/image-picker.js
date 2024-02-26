@@ -22,7 +22,7 @@ export default function ImagePicker({ label, name }) {
 
         //Creating form data which will store the image
         const formData = new FormData();
-        formData.append('image', image);
+        formData.append('file', image);
 
         //Now finally uploading the image to cloudinary
         fetch('/api/upload/meal/image', {

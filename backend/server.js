@@ -7,11 +7,14 @@ const { uploadToCloudinary } = require('./utils/cloudinaryUpload');
 
 // Use cors middleware
 const corsOptions = {
-  origin: 'http://localhost:3000',
+  origin: 'http://frontend-culinarycompass:3000',
   methods: 'POST',
 };
 
 const SERVER_PORT = process.env.SERVER_PORT || 5000;
+
+const storage = multer.memoryStorage();
+const upload = multer({ storage });
 
 const server = http.createServer(async (req, res) => {
   console.log(req.url);
@@ -19,11 +22,8 @@ const server = http.createServer(async (req, res) => {
     if (req.method === 'GET' && req.url === '/') {
       res.writeHead(200, { 'Content-Type': 'application/json' });
       res.end(JSON.stringify({ message: 'Hello from backend!' }));
-    } else if (req.method === 'POST' && req.url === '/api/upload/meal/image') {
-      const storage = multer.memoryStorage();
-      const upload = multer({ storage });
-      
-      upload.single('image')(req, res, async (err) => {
+    } else if (req.method === 'POST' && req.url === '/api/upload/meal/image') {      
+      upload.single('file')(req, res, async (err) => {
         if (err) {
           console.error(err);
           res.writeHead(400, { 'Content-Type': 'application/json' });

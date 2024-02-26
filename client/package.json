@@ -2,7 +2,6 @@
   "name": "culinarycompass",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://backend:5000",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -13,6 +12,7 @@
   "dependencies": {
     "@vercel/postgres": "^0.7.2",
     "dotenv": "^16.4.5",
+    "http-proxy-middleware": "^2.0.6",
     "next": "14.1.0",
     "react": "^18",
     "react-dom": "^18"
