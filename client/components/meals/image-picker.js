@@ -5,7 +5,7 @@ import classes from "./image-picker.module.css";
 import Image from "next/image";
 
 export default function ImagePicker({ label, name }) {
-    const [pickedImage, setPickedImage] = useState();
+    const [pickedImage, setPickedImage] = useState([]);
 
     const imageInputRef = useRef();
 
@@ -17,23 +17,24 @@ export default function ImagePicker({ label, name }) {
         const image = event.target.files[0];
 
         if (!image) {
-            setPickedImage(null);
+            setPickedImage([]);
             return;
         }
 
         // Creating form data which will store the image
         const formData = new FormData();
         formData.append('file', image);
+        
 
         // To display image in preview to user before uploading
         // to cloudinary. Also makes the app feel more responsive.
-        const fileReader = new FileReader();
-        fileReader.onload = () => {
-            if (typeof fileReader.result === 'string') {
-                setPickedImage(fileReader.result);
-            }
-        }
-        fileReader.readAsDataURL(image);
+        // const fileReader = new FileReader();
+        // fileReader.onload = () => {
+        //     if (typeof fileReader.result === 'string') {
+        //         setPickedImage([ ...pickedImage, fileReader.result]);
+        //     }
+        // }
+        // fileReader.readAsDataURL(image);
 
         //Now finally uploading the image to cloudinary
         fetch('/api/upload/meal/image', {
@@ -55,10 +56,10 @@ export default function ImagePicker({ label, name }) {
                     However, it will create another traffic in the network.
                     Or, we could remove the below setPickedImage(data.imageUrl)
                     and use FileReader as it was and use Toast to notify user
-                    that image has been uploaded successful!
+                    that image has been uploaded successfully!
 
                 */
-                setPickedImage(data.imageUrl);
+                setPickedImage([ ...pickedImage, data.imageUrl]);
             });
     }
 
@@ -66,15 +67,19 @@ export default function ImagePicker({ label, name }) {
         <div className={classes.picker}>
             <label htmlFor={name}>{ label }</label>
             <div className={classes.controls}>
-                <div className={classes.preview}>
-                    { !pickedImage && <p>No image picked yet.</p> }
+                <div className={classes.previewContainer}>
+                    { pickedImage.length === 0 && <p className={classes.preview}>No image picked yet.</p> }
                     {
-                        pickedImage && (
-                            <Image
-                                src={pickedImage}
-                                alt="Image picked by the user."
-                                fill
-                            />
+                        pickedImage.length > 0 && (
+                            pickedImage.map((image, index) => 
+                                <div className={classes.preview} key={index}>
+                                    <Image
+                                        src={image}
+                                        alt="Image picked by the user."
+                                        fill
+                                    />
+                                </div>
+                            )
                         )
                     }
                 </div>
@@ -86,8 +91,9 @@ export default function ImagePicker({ label, name }) {
                     name={name}
                     ref={imageInputRef}
                     onChange={handleImageChange}
+                    required
                 />
-                <button
+                 <button
                     className={classes.button}
                     type="button"
                     onClick={handleMealSubmission}

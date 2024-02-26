@@ -1,5 +1,7 @@
 import { sql } from "@vercel/postgres";
 import { unstable_noStore as noStore } from "next/cache"; 
+import slugify from "slugify";
+import xss from "xss";
 import fs from "node:fs";
 
 
@@ -22,8 +24,10 @@ export async function getMealsBySlug(slug) {
     //Again, we don't use cached data
     noStore();
 
+    const sanitisedSlug = xss(slugify(slug, { lower: true }));
+
     try {
-        const data = await sql`SELECT * FROM meals WHERE slug=${slug}`;
+        const data = await sql`SELECT * FROM meals WHERE slug=${sanitisedSlug}`;
 
         //Making a shallow copy so that mealFromDB is independent from data.rows
         const mealFromDB = data.rows.map(meal => ({
@@ -38,6 +42,9 @@ export async function getMealsBySlug(slug) {
 }
 
 export async function saveMeal(meal) {
+    meal.title = xss(slugify(meal.title, { lower: true }));
+    meal.instructions = xss(slugify(meal.instructions, { lower: true }));
+
     try {
         if (meal.images && meal.images.length > 0) {
             const imagePromises = meal.images.map(async (image, index) => {

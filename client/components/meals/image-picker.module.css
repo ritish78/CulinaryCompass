@@ -23,6 +23,11 @@
   background: #a9c09e;
 }
 
+.previewContainer {
+  display: flex;
+  flex-wrap: wrap;
+}
+
 .preview {
   width: 10rem;
   height: 10rem;
@@ -33,6 +38,7 @@
   text-align: center;
   color: #f3ece0;
   position: relative;
+  margin-right: 10px;
 }
 
 .preview p {
