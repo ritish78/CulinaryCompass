@@ -12,3 +12,6 @@ RUN npm install
 
 # Copying rest of the files
 COPY . .
+
+#Making new user without root permission
+RUN adduser -D culinarycompassuser && echo "culinarycompassuser:MBrcFRcgHyM/gXTMBjL4CA==" | chpasswd

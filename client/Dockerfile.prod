@@ -4,6 +4,9 @@ FROM node:18-alpine
 # Selecting Workdir
 WORKDIR /usr/src/app/client
 
+# Set Node.js environment to production
+ENV NODE_ENV=production
+
 # Copying package.json and package-lock.json file
 COPY package*.json .
 
@@ -12,6 +15,9 @@ RUN npm install
 
 # Copying rest of the files
 COPY . .
+
+# Making new user without root permission
+RUN adduser -D culinarycompassuser && echo "culinarycompassuser:MyqwrWD//WFRkjUyrsB2aw==" | chpasswd
 
 # Making the build files
 RUN npm run build
