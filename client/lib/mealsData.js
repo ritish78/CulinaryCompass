@@ -2,7 +2,8 @@ import { sql } from "@vercel/postgres";
 import { unstable_noStore as noStore } from "next/cache"; 
 import slugify from "slugify";
 import xss from "xss";
-import fs from "node:fs";
+import { v4 as uuid } from "uuid"; 
+// import fs from "node:fs";
 
 
 export async function getMeals() {
@@ -42,33 +43,38 @@ export async function getMealsBySlug(slug) {
 }
 
 export async function saveMeal(meal) {
-    meal.title = xss(slugify(meal.title, { lower: true }));
+    meal.id = uuid();
+    // meal.title = xss(slugify(meal.title, { lower: true }));
     meal.instructions = xss(slugify(meal.instructions, { lower: true }));
+    meal.slug = xss(slugify(meal.title + "-" + meal.id, { lower: true }));
 
     try {
-        if (meal.images && meal.images.length > 0) {
-            const imagePromises = meal.images.map(async (image, index) => {
-                if (image instanceof File) {
-                    const fileName = image.name;
-                    const stream = fs.createWriteStream(`public/foodImages/${fileName}`);
-                    const bufferedImage = await image.arrayBuffer();
+        // To store in the public folder
+        // Sunsetting it to store the uploaded images in cloudinary instead
+        
+        // if (meal.images && meal.images.length > 0) {
+        //     const imagePromises = meal.images.map(async (image, index) => {
+        //         if (image instanceof File) {
+        //             const fileName = image.name;
+        //             const stream = fs.createWriteStream(`public/foodImages/${fileName}`);
+        //             const bufferedImage = await image.arrayBuffer();
 
-                    stream.write(Buffer.from(bufferedImage), error => {
-                        if (error) {
-                            throw new Error(`Could not save image ${index + 1}!`);
-                        }
-                    });
+        //             stream.write(Buffer.from(bufferedImage), error => {
+        //                 if (error) {
+        //                     throw new Error(`Could not save image ${index + 1}!`);
+        //                 }
+        //             });
 
-                    meal.images[index] = `/foodImages/${fileName}`;
-                }
-            });
+        //             meal.images[index] = `/foodImages/${fileName}`;
+        //         }
+        //     });
 
-            await Promise.all(imagePromises);
-        }
+        //     await Promise.all(imagePromises);
+        // }
 
         const data = await sql`
-            INSERT INTO meals (id, title, slug, images, summary, instructions, creator, creator_email)
-            VALUES (${meal.id}, ${meal.title}, ${meal.slug}, ${meal.images}, ${meal.summary}, ${meal.instructions}, ${meal.creator}, ${meal.creator_email})
+            INSERT INTO meals (id, title, slug, images, summary, ingredients, instructions, creator, creator_email)
+            VALUES (${meal.id}, ${meal.title}, ${meal.slug}, ${meal.images}, ${meal.summary}, ${meal.ingredients}, ${meal.instructions}, ${meal.creator}, ${meal.creator_email})
             RETURNING *;
         `;
 
