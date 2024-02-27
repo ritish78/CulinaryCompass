@@ -1,17 +1,13 @@
 version: "3.8"
 
-services:
+services: 
   frontend:
     container_name: frontend-culinarycompass
     build:
       context: ./client
-      dockerfile: Dockerfile.dev
+      dockerfile: Dockerfile.prod
     stdin_open: true
-    command: npm run start-watch
-    volumes:
-      - ./client:/usr/src/app/client
-      - /usr/src/app/client/node_modules
-      - /usr/src/app/client/.next
+    command: npm start
     networks:
       - culinarycompass-network
     ports:
