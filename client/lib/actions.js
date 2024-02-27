@@ -1,11 +1,20 @@
 'use server';
 
+import { redirect } from "next/navigation";
 import { saveMeal } from "./mealsData";
 
-//creating a server action to save meal to database
-export async function saveMealToDB(formData) {
-    console.log('Saving Meal!');
+function isInValidText(text) {
+    return !text || text.trim() === '';
+}
 
+function isValidEmail(email) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    return emailRegex.test(email);
+}
+
+//creating a server action to save meal to database
+export async function saveMealToDB(prevState, formData) {
     const meal = {
         title: formData.get('title'),
         summary: formData.get('summary'),
@@ -14,6 +23,21 @@ export async function saveMealToDB(formData) {
         images: formData.get('images'),
         creator: formData.get('name'),
         creator_email: formData.get('email')
+    }
+
+    if (
+        isInValidText(meal.title) || 
+        isInValidText(meal.summary) || 
+        isInValidText(meal.ingredients) ||
+        isInValidText(meal.instructions) ||
+        isInValidText(meal.creator) ||
+        isInValidText(meal.creator_email) ||
+        !isValidEmail(meal.creator_email) ||
+        !meal.images || meal.images.size === 0
+    ) {
+        return {
+            message: 'Invalid Form Input! Please check the provided data!'
+        }
     }
 
     const anotherFormData = new FormData();
@@ -35,7 +59,6 @@ export async function saveMealToDB(formData) {
     const urlObject = await uploadedImageUrl.json();
     meal.images = [urlObject.imageUrl];
       
-
-    console.log("To be saved Meal: ", meal);
-    saveMeal(meal);
+    const savedMeal = await saveMeal(meal);
+    redirect(`/meals/${savedMeal.slug}`);
 }

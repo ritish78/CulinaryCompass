@@ -1,8 +1,14 @@
+"use client";
+
+import { useFormState } from 'react-dom';
+
 import ImagePicker from "@/components/meals/image-picker";
 import classes from "./page.module.css";
 import { saveMealToDB } from "@/lib/actions";
+import MealsFormSubmit from "@/components/meals/meals-form-submit";
 
 export default function MealSharePage() {
+    const [state, formAction] = useFormState(saveMealToDB, { message: null });
 
     return (
         <>
@@ -11,7 +17,7 @@ export default function MealSharePage() {
                 <p>Or share any other recipe that you would like the rest of the world to know.</p>
             </header>
             <main className={classes.main}>
-                <form className={classes.form} action={saveMealToDB}>
+                <form className={classes.form} action={formAction}>
                     <div className={classes.row}>
                         <p>
                             <label htmlFor="name">Your Name</label>
@@ -80,10 +86,9 @@ export default function MealSharePage() {
                         label="Your image" 
                         name="images"
                     />
+                    { state.message && <p>{ state.message }</p> }
                     <p className={classes.actions}>
-                        <button type="submit">
-                            Share Meal
-                        </button>
+                        <MealsFormSubmit />
                     </p>
                 </form>
             </main>
