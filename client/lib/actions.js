@@ -2,6 +2,7 @@
 
 import { redirect } from "next/navigation";
 import { saveMeal } from "./mealsData";
+import { revalidatePath } from "next/cache";
 
 function isInValidText(text) {
     return !text || text.trim() === '';
@@ -60,5 +61,10 @@ export async function saveMealToDB(prevState, formData) {
     meal.images = [urlObject.imageUrl];
       
     const savedMeal = await saveMeal(meal);
+
+    // We don't need to revalidate Nextjs cache as we redirect to the
+    // new meal created page
+    // revalidatePath('/meals');
+
     redirect(`/meals/${savedMeal.slug}`);
 }

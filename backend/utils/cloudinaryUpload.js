@@ -34,7 +34,7 @@ const uploadToCloudinary = async (file) => {
       public_id: `${file.fieldname}_${Date.now()}`,
       format: 'webp',
       transformation: [
-        { width: 1200, height: 1000, crop: 'pad' }
+        { width: 1000, height: 1250, crop: 'fit' }
       ]
     }, (error, result) => {
       if (error) {

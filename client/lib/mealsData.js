@@ -46,7 +46,7 @@ export async function saveMeal(meal) {
     meal.id = uuid();
     // meal.title = xss(slugify(meal.title, { lower: true }));
     meal.title = meal.title.trim();
-    meal.instructions = xss(slugify(meal.instructions, { lower: true }));
+    meal.instructions = xss(meal.instructions);
     meal.slug = xss(slugify(meal.title + "-" + meal.id, { lower: true }));
 
     try {
