@@ -19,6 +19,8 @@ First things first, the meal images used in this project was downloaded from Uns
 # Screenshot:
 ![CulinaryCompass](https://github.com/ritish78/CulinaryCompass/assets/36816476/bfd1cada-bd8d-41b4-93dc-c76a4a143402)
 
+# Prerequisite:
+* Docker installed
 
 # How to install:
 1. First clone the repo. To do so, open the terminal and enter:
@@ -55,6 +57,23 @@ docker compose -f docker-compose-prod.yml up
 # Tech Stack used
 * Backend: `Node.js` as Runtime, `http` from node to create server.
 * Frontend: `Nextjs` framework which runs using `Javascript`.
+* Proxy: `nginx` which is specified to run on docker container along with frontend and backend.
 * Database: `Postgres` hosted on vercel.
 * Image Manipulation: `Sharp` library is used to convert uploaded images to `webp` format.
 * Cloud Storage: `Cloduinary` for the uploaded pictures, `Vercel` for Postgres.
+
+### Nginx:
+```
+Client (Browser)
+   |
+   | HTTP request to localhost
+   v
+Nginx (localhost:80 in Docker)
+   |
+   | /api/* request
+   |---------------------------> Backend Server (backend-culinarycompass:5000 in Docker)
+   |
+   | /* request
+   v
+Frontend Server (frontend-culinarycompass:3000 in Docker)
+```
